@@ -47,7 +47,7 @@
         },
     }
 </script>
-<style>
+<style scoped>
     html {
         background: #373D41;
     }

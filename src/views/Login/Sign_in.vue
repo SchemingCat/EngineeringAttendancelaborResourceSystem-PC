@@ -5,15 +5,15 @@
                 <p class="hello">您好，【用户名/企业名称】邀请您加入他的团队</p>
                 <div style="    margin-top: 70px;">
                     <img src="images/name.png" class="img">
-                    <input class="name" type="text" :value="name" placeholder="请输入手机号" />
+                    <input class="name" type="text" v-model="name" placeholder="请输入手机号" />
                 </div>
                 <div style="    margin-top: 70px;">
                     <img src="images/pwd.png" class="img">
-                    <input class="name" type="password" :value="pwd" placeholder="请输入密码" @keyup.enter="submit"/>
+                    <input class="name" type="password" v-model="pwd" placeholder="请输入密码" @keyup.enter="submit"/>
                 </div>
                 <div class="cent" style="position: relative">
                     <img src="images/sd.png" class="sd1">
-                    <button class="btn" >登录并加入团队</button>
+                    <button class="btn" @click="login">登录并加入团队</button>
                 </div>
 
                 <div style="margin-top: 20px">
@@ -25,7 +25,6 @@
         </div>
     </div>
 </template>
-
 <script>
     export default{
         data () {
@@ -36,8 +35,25 @@
         },
         methods: {
             submit:function(){
-                    alert(11)
-            }
+                  this.login()
+            },
+            login:function(){
+                let that = this;
+                this.$axios.get('/login',{
+                     params:{
+                        staffPhone:that.name,
+                        password : that.pwd,
+                    }
+                }
+                ).then(res =>{
+                    console.log(res.data)
+                    if(res.data.code){
+                        sessionStorage.setItem('token',res.data.data)
+                        that.$router.push("/home")
+                    }
+                    
+                })
+            },
         }
     }
 </script>
