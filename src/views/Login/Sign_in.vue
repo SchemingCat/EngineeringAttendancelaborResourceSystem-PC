@@ -30,7 +30,7 @@
         data () {
             return {
                 name:"",
-                pwd:""      
+                pwd:"",
             }
         },
         methods: {
