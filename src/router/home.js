@@ -26,6 +26,7 @@ export default {
                 {
                     path: '/',
                     name:'XiangMu1',
+                    
                     component: XiangMu1,
                 },
                 {
