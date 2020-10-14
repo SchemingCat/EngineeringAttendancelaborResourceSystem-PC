@@ -2,6 +2,7 @@
     <div class="aaa">
         <div class="box">
             <div class="content">
+                  
                 <p class="hello">您好，【用户名/企业名称】邀请您加入他的团队</p>
                 <div style="    margin-top: 35px;">
                     <img src="images/name.png" class="img">

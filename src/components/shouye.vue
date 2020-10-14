@@ -4,7 +4,7 @@
             <div class="gs">
                 <el-row>
                     <el-col :span="12">
-                        <div class="grid-content bg-purple">Hk控股股份有限公司(企业团队名称)暂未认证,马上认证
+                        <div class="grid-content bg-purple">Hk控股股份有限公司(企业团队名称)暂未认证,马上认证<div>{{$route.params.id}}</div>
                         </div>
                     </el-col>
                     <el-col :span="5" :offset="7">
@@ -155,10 +155,6 @@
                 <div class="xm">
 
                 </div>
-
-
-
-
             </div>
         </div>
 
@@ -167,10 +163,15 @@
 </template>
 <script>
     export default {
+        props: ['inputName'],
         data() {
             return {
-                input2: ""
+                input2: "",
+                new1:this.inputName
             }
+        },
+        created () {
+            console.log(this.new1)
         }
     }
 </script>

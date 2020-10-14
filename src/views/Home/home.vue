@@ -8,13 +8,13 @@
             <div class="dh">
                 <el-row>
                     <el-col :span="3">
-                        <div class="grid-content bg-purple-dark aa"><router-link tag="span" to="path">首页</router-link></div>
+                        <div class="grid-content bg-purple-dark aa"><router-link tag="span" :to="{name:'shouye'}">首页</router-link></div>
+                    </el-col>   
+                    <el-col :span="3">
+                        <div class="grid-content bg-purple-dark aa"><router-link tag="span" :to="{name:'XiangMu'}">组织</router-link></div>
                     </el-col>
                     <el-col :span="3">
-                        <div class="grid-content bg-purple-dark aa">组织</div>
-                    </el-col>
-                    <el-col :span="3">
-                        <div class="grid-content bg-purple-dark aa">项目</div>
+                        <div class="grid-content bg-purple-dark aa"><router-link tag="span" :to="{name:'XiangMu'}">项目</router-link></div>
                     </el-col>
                     <el-col :span="3">
                         <div class="grid-content bg-purple-dark aa">工资</div>
@@ -48,17 +48,24 @@
 
         </div>
         <div class="back"> 
-           <router-view />
+           <router-view :inputName="name" />
         </div>
     </div>
 </template>
 
 <script>
+    
     export default {
         data() {
             return {
                 activeIndex: '1',
+                sse:'123',
+                name:"4444",
             }
+        },
+        created () {
+        
+          console.log(  sessionStorage.getItem('token')  )
         },
         beforeRouteEnter(to, from, next) {
             if (to.name != 'index') {
