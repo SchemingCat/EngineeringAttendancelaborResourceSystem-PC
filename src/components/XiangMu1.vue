@@ -111,7 +111,8 @@
                     date: '2016-05-03',
                     name: '王小虎',
                     address: '上海市普陀区金沙江路 1516 弄'
-                }]
+                }],
+                num:[820, 932, 901, 934, 1290, 1330, 1320]
             }
         },
         created() {
@@ -124,11 +125,10 @@
             drawLine() {
                 // var echarts = require('echarts');
                 // var myChart = echarts.init(document.getElementById('main'));
-
+                var that = this
                 var bar_dv = this.$refs.chart;
 
                 let myChart = this.$echarts.init(bar_dv)
-
                 myChart.setOption({
                     xAxis: {
                         type: 'category',
@@ -138,7 +138,7 @@
                         type: 'value'
                     },
                     series: [{
-                        data: [820, 932, 901, 934, 1290, 1330, 1320],
+                        data: that.num,
                         type: 'line'
                     }]
                 });

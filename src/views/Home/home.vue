@@ -8,13 +8,19 @@
             <div class="dh">
                 <el-row>
                     <el-col :span="3">
-                        <div class="grid-content bg-purple-dark aa"><router-link tag="span" :to="{name:'shouye'}">首页</router-link></div>
-                    </el-col>   
-                    <el-col :span="3">
-                        <div class="grid-content bg-purple-dark aa"><router-link tag="span" :to="{name:'XiangMu'}">组织</router-link></div>
+                        <div class="grid-content bg-purple-dark aa">
+                            <router-link tag="span" :to="{name:'shouye'}">首页</router-link>
+                        </div>
                     </el-col>
                     <el-col :span="3">
-                        <div class="grid-content bg-purple-dark aa"><router-link tag="span" :to="{name:'XiangMu'}">项目</router-link></div>
+                        <div class="grid-content bg-purple-dark aa">
+                            <router-link tag="span" :to="{name:'XiangMu'}">组织</router-link>
+                        </div>
+                    </el-col>
+                    <el-col :span="3">
+                        <div class="grid-content bg-purple-dark aa">
+                            <router-link tag="span" :to="{name:'XiangMu'}">项目</router-link>
+                        </div>
                     </el-col>
                     <el-col :span="3">
                         <div class="grid-content bg-purple-dark aa">工资</div>
@@ -26,7 +32,7 @@
                         <div class="grid-content bg-purple-dark aa ">考勤</div>
                     </el-col>
                     <el-col :span="3">
-                        <div class="grid-content bg-purple-dark aa">权限</div>
+                        <router-link tag="span" :to="{name:'QuanXian'}">权限</router-link>
                     </el-col>
                     <el-col :span="3">
                         <div class="grid-content bg-purple-dark aa">项设</div>
@@ -36,36 +42,46 @@
             <div class="user">
                 <div class="yidong">点击跳转移动端</div>
                 <el-badge :value="200" :max="99" class="item">
-                    <el-button size="small" style="background: #523C44 "><img src="../../../public//images/更多.png" style="width: 50%;height: 50%;" /></el-button>
-                  </el-badge>
-                  <div class="admin">
-                    <i class="el-icon-user"></i>admin
-                  </div>
-                  <div style="margin-left: 30px">
-                      <img src="../../../public/images/关机.png" />
-                  </div>
+                    <el-button size="small" style="background: #523C44 "><img src="../../../public//images/更多.png"
+                            style="width: 50%;height: 50%;" /></el-button>
+                </el-badge>
+                <div class="admin">
+                    <i class="el-icon-user"></i>{{user.staffName}}
+                </div>
+                <div style="margin-left: 30px">
+                    <img src="../../../public/images/关机.png" />
+                </div>
             </div>
 
         </div>
-        <div class="back"> 
-           <router-view :inputName="name" />
+        <div class="back">
+            <router-view :inputName="name" />
         </div>
     </div>
 </template>
 
 <script>
-    
+
     export default {
         data() {
             return {
                 activeIndex: '1',
-                sse:'123',
-                name:"4444",
+                sse: '123',
+                name: "4444",
+                user: {}
             }
         },
-        created () {
-        
-          console.log(  sessionStorage.getItem('token')  )
+        created() {
+            var that = this
+            console.log(sessionStorage.getItem('token'))
+            this.$axios.get('/getToken', {
+                params: {
+                    key: sessionStorage.getItem('token')
+                }
+            }).then(res => {
+                console.log(res.data.data)
+                that.user = res.data.data
+            })
         },
         beforeRouteEnter(to, from, next) {
             if (to.name != 'index') {
@@ -89,19 +105,22 @@
     }
 </script>
 <style scoped>
-    .back{
+    .back {
         background: white;
         height: 900px;
     }
-    .yidong{
+
+    .yidong {
         color: white;
         font-size: 30px;
         cursor: pointer;
         margin-right: 10px
     }
-    .yidong:hover{
+
+    .yidong:hover {
         background: #523C44
     }
+
     .header {
         width: 100%;
         height: 100px;
@@ -136,16 +155,19 @@
         top: -15px;
         text-align: center
     }
-    .aa:hover{
+
+    .aa:hover {
         background: #523C44
     }
-    .user{
+
+    .user {
         display: flex;
-        float:right;
+        float: right;
         margin-top: -55px;
         margin-right: 10px;
     }
-    .admin{
+
+    .admin {
         color: white;
         font-size: 30px;
         margin-left: 30px
